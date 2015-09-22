@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Lorem ipsum</title>
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+		<link rel="stylesheet" href="/resources/styles.css">
+		<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  		<script>
+  			$( document ).ready(function() {
+		
+				$.ajax({
+                    url: 'getComments',
+                    success : function(data) {
+                       $("<div id='allComments'>").insertAfter("#content");
+                       $("#allComments").html(data);
+                    },
+                });
+
+  				var channelList = 
+  					'<div class="ui-widget"> \
+  						<label for="tags">Search: </label> \
+  						<input id="tags"> \
+					</div>';
+  				
+  				$(channelList).insertBefore("#content");
+  				$(document.body).append("<input id='comment'>");
+  				
+                $('#tags').keypress(function (e) {
+                	if (e.which == 13) {
+                	var selection = $('#tags').val();
+                     $.ajax({
+                        url: 'receive',
+                        type: 'post',
+                        dataType: 'html',
+                        data : { ajax_post_data: 'Haskell', cc: 'dum', lang: selection},//$('#tags').text()},
+                        success : function(data) {
+                        	$('#session').html(data);
+                               },
+                         });
+                 	}
+                });
+
+                $('#comment').keypress(function (e) {
+                	if (e.which == 13) {
+                	var selection = $('#comment').val();
+                     $.ajax({
+                        url: 'receive',
+                        type: 'post',
+                        dataType: 'html',
+                        data : { lang: selection},//$('#tags').text()},
+                        success : function(data) {
+                        	$('#allComments').html(data);
+                               },
+                         });
+                 	}
+                });
+                 	
+			});
+
+  			$(function() {
+			    var availableChannels = [
+			      "Android",
+			      "BASIC",
+			      "COBOL",
+			      "DOM",
+			      "Erlang",
+			      "Fortran",
+			      "Go",
+			      "Haskell",
+			      "iOS",
+			      "JavaScript",
+			      "KDE",
+			      "Lisp",
+			      "MySQL",
+			      "NodeJS",
+			      "Python",
+			      "Qt",
+			      "Ruby",
+			      "Scala",
+			      "Tcl",
+			      "Unix",
+			      "VB",
+			      "web",
+			      "XPath",
+			      "YQL",
+			      "Z"
+
+			    ];
+
+			    $( "#tags" ).autocomplete({
+	      			source: availableChannels
+	    		});
+	  		});
+	  </script>
+
+	</head>
+
+	<body>
+	
+		<div id="content">
+
+			<p>Lorem ipsum dolor sit amet, sea pertinacia signiferumque no. Quando primis feugiat et sit. Pro et viderer nonumes. Consulatu intellegebat sit at, ea impetus pertinax adversarium pro. Praesent scripserit has no, cu vim affert democritum appellantur. Qui essent scripserit an.
+
+			In menandri sadipscing mediocritatem mel. Ludus aliquam debitis eam et, alia reque ne ius. Cum te nihil praesent, no viris gubergren tincidunt sit. Vel facer senserit mnesarchum at, eos at postulant voluptatibus.
+
+			Ei commodo constituam his, impedit conceptam te nam. Sonet aliquid ex pri. Pri eligendi invidunt perpetua id, munere oblique eam an, pri sonet rationibus conclusionemque eu. Mei ei nihil laudem invenire. Vel cu utinam moderatius, vel eu tantas appareat. Mei dicta inani aliquid ex, tation antiopam splendide vel in.
+
+			Dolor dissentiet signiferumque sed an. Te quando appetere qui, no mei bonorum maiestatis, vim quaerendum scriptorem reformidans te. Scaevola assentior ne vel, rationibus dissentiunt vim ex. Mei ea legendos prodesset sadipscing, sed meis viderer definitionem in, duo eu diceret detracto pericula. No nec verterem perfecto mediocritatem.</p>
+
+
+		</div>
+	
+	</body>
+	
+
+</html>
